@@ -54,13 +54,13 @@ form = '''<!DOCTYPE html>
 
     <body>
 
-      <form action="/rotate" method="post">
+      <form action="/" method="post">
 
 	  <label for="rot">Rotate by:</label><br>
 
-	  <input type="text" id="rot" name="rot" value="{0}" /><br>
+	  <input type="text" id="rot" name="rot" value="0" /><br>
 
-	  <textarea id="text" name="text">{1}</textarea>
+	  <textarea id="text" name="text">{0}</textarea>
 
 	  <input type="submit" value="sumbit" />
 
@@ -80,15 +80,15 @@ def index():
 	return form.format("")
 
 
-@app.route("/rotate", methods=["post"])
-def rotate():
+@app.route("/", methods=["post"])
+def encrypt():
 
 	text = request.form["text"]
 
 	rot = int(request.form["rot"])
 
-	final = encrypt(text, rot)
+	final = rotate_string(text, rot)
 
-	return form.format(rot, final)
+	return form.format(final)
 
 app.run()
